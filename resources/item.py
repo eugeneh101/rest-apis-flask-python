@@ -118,4 +118,5 @@ class ItemList(Resource):
         
         # return {"items": items}  # must return a dictionary    
 
-        {"items":[item.json() for item in ItemModel.query.all()]}
+#         return {"items": [item.json() for item in ItemModel.query.all()]}
+        return {"items": [item.json() for item in ItemModel.find_all()]}
