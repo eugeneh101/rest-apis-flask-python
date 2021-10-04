@@ -14,6 +14,9 @@ class UserModel(db.Model):  # this API (with 2 methods) is an interface for othe
         self.username = username
         self.password = password
 
+    def json(self):
+        return {"id": self.id, "username": self.username}
+
     @classmethod
     def find_by_username(cls, username):
         # connection = sqlite3.connect("data.db")
@@ -47,6 +50,14 @@ class UserModel(db.Model):  # this API (with 2 methods) is an interface for othe
 
         return cls.query.filter_by(id=_id).first()
 
+    @classmethod
+    def find_by_username(cls, username):
+        return cls.query.filter_by(username=username).first()
+
     def save_to_db(self):  # upsert
         db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()
