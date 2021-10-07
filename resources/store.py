@@ -26,7 +26,9 @@ class Store(Resource):
         store = StoreModel.find_by_name(name)
         if store:
             store.delete_from_db()
-        return {"message": "Store deleted"}  # do we care if nothing was actually deleted?
+        return {
+            "message": "Store deleted"
+        }  # do we care if nothing was actually deleted?
 
 
 class StoreList(Resource):

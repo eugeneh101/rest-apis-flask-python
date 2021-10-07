@@ -3,12 +3,20 @@ import sqlite3
 from db import db
 
 
-class UserModel(db.Model):  # this API (with 2 methods) is an interface for other parts of our program to interact with users
+class UserModel(
+    db.Model
+):  # this API (with 2 methods) is an interface for other parts of our program to interact with users
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True)  # these are the columns actually stored in database; auto-incrementing
-    username = db.Column(db.String(80))  # these are the columns actually stored in database
-    password = db.Column(db.String(80))  # these are the columns actually stored in database
+    id = db.Column(
+        db.Integer, primary_key=True
+    )  # these are the columns actually stored in database; auto-incrementing
+    username = db.Column(
+        db.String(80)
+    )  # these are the columns actually stored in database
+    password = db.Column(
+        db.String(80)
+    )  # these are the columns actually stored in database
 
     def __init__(self, username, password):
         self.username = username

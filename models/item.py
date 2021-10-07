@@ -2,14 +2,21 @@
 
 from db import db
 
+
 class ItemModel(db.Model):
 
     __tablename__ = "items"
-    id = db.Column(db.Integer, primary_key=True)  # these are the columns actually stored in database
+    id = db.Column(
+        db.Integer, primary_key=True
+    )  # these are the columns actually stored in database
     name = db.Column(db.String(80))  # these are the columns actually stored in database
-    price = db.Column(db.Float(precision=2))  # these are the columns actually stored in database
+    price = db.Column(
+        db.Float(precision=2)
+    )  # these are the columns actually stored in database
 
-    store_id = db.Column(db.Integer, db.ForeignKey("stores.id"))  # have to delete all items in a store before being able to delete store/almost like a folder
+    store_id = db.Column(
+        db.Integer, db.ForeignKey("stores.id")
+    )  # have to delete all items in a store before being able to delete store/almost like a folder
     store = db.relationship("StoreModel")
 
     def __init__(self, name, price, store_id):
@@ -39,19 +46,21 @@ class ItemModel(db.Model):
         #     return cls(*row)
 
         # returns ItemModel instance
-        return cls.query.filter_by(name=name).first()  # SELECT * FROM __tablename__ WHERE name=name LIMIT 1;
+        return cls.query.filter_by(
+            name=name
+        ).first()  # SELECT * FROM __tablename__ WHERE name=name LIMIT 1;
 
     @classmethod
     def find_all(cls):
         return cls.query.all()
 
     # def insert(self):
-        # connection = sqlite3.connect("data.db")
-        # cursor = connection.cursor()
-        # query = "INSERT INTO items VALUES (?, ?)"
-        # cursor.execute(query, (self.name, self.price))
-        # connection.commit()
-        # connection.close()
+    #     connection = sqlite3.connect("data.db")
+    #     cursor = connection.cursor()
+    #     query = "INSERT INTO items VALUES (?, ?)"
+    #     cursor.execute(query, (self.name, self.price))
+    #     connection.commit()
+    #     connection.close()
 
     # def update(self):
     #     connection = sqlite3.connect("data.db")
